@@ -1,0 +1,60 @@
+### -------------------------------------------------------------- 
+Entidades
+### --------------------------------------------------------------
+Instrumentos
+Usuarios (Cliente/Asesor/Administrador)
+Portafolio
+PosicionPortafolio
+Instrumentos
+Ordenes
+Alertas
+Notificaciones
+AsesorCliente
+
+### -------------------------------------------------------------- 
+Diseño de Endpoints
+### -------------------------------------------------------------- 
+
+### Admin Endpoints
+- POST /api/v1/admin/users - Crear usuario 
+- GET /api/v1/admin/users - Listar usuarios 
+- POST /api/v1/admin/instruments - Crear instrumento 
+- GET /api/v1/admin/assignments - Listar asignaciones 
+- POST /api/v1/admin/assignments - Crear asignación 
+
+### Advisor Endpoints
+- GET /api/v1/advisor/clients/{clientId}/portfolio - Portfolio del cliente 
+- GET /api/v1/advisor/orders/pending - Órdenes pendientes 
+- POST /api/v1/advisor/orders/{orderId}/approve - Aprobar orden 
+- POST /api/v1/advisor/orders/{orderId}/revoke - Cancelar orden 
+- GET /api/v1/advisor/reports/performance - Reporte de performance 
+
+### Client Endpoints
+- GET /api/v1/portfolios/{clientId} - Portafolio 
+- GET /api/v1/instruments - Listar instrumentos 
+- POST /api/v1/orders - Crear orden 
+- GET /api/v1/orders - Historial de órdenes 
+- DELETE /api/v1/orders/{orderId} - Cancelar orden 
+- POST /api/v1/alerts - Crear alerta 
+- GET /api/v1/alerts - Listar alertas 
+- GET /api/v1/notifications - Listar notificaciones 
+
+### Auth Endpoints
+- POST /api/v1/auth/token - Obtener token JWT 
+- POST /api/v1/auth/revoke - Revocar token 
+
+### -------------------------------------------------------------- 
+Seguridad
+### -------------------------------------------------------------- 
+Se utiliza el modelo RBAC.
+
+### -------------------------------------------------------------- 
+Documentación
+### -------------------------------------------------------------- 
+Se genera la documentación con Swagger 
+
+### -------------------------------------------------------------- 
+Filtrado / Páginado/ Ordenamiento
+###-------------------------------------------------------------- 
+Se utilizan en las consultas para clientes, asesores.
+

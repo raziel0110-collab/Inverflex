@@ -1,0 +1,181 @@
+--USUARIOS
+{"username":"admin","password":"Demo123!"}       1
+{"username":"ANQUESADA","password":"Demo123!"}   2
+{"username":"JOBANDO","password":"Demo123!"}     3
+{"username":"MAMORALES","password":"Demo123!"}   4
+
+
+--------------------------------------------------
+--CLIENTE 
+--------------------------------------------------
+{"username":"ANQUESADA","password":"Demo123!"} 
+
+--CONSULTA PORTAFOLIO
+Cliente: 2
+
+--CREAR ORDEN -> SIDE: 0-Compra 1-Venta
+{
+  "instrumentId": "AMZN",
+  "side": 0,
+  "quantity": 250,
+  "clientId": "2"
+}
+--------------------------------------------------
+- ASESOR
+--------------------------------------------------
+{"username":"MAMORALES","password":"Demo123!"}
+
+--CONSULTAR ORDEN PENDIENTE 
+
+--APROBAR ORDEN
+Orden:
+Cliente: 2
+
+--------------------------------------------------
+--CLIENTE 
+--------------------------------------------------
+{"username":"ANQUESADA","password":"Demo123!"} 
+
+--CREAR UNA ALERTA -> DIRECCION 0-Sube 1-BAJA 
+
+{
+  "instrumentId": "AMZN",
+  "direction": 0,
+  "percentChange": 2,
+  "clientId": "2"
+}
+
+--------------------------------------------------
+--CONSULTA DE LA ALERTA EN SQL LITE
+--------------------------------------------------
+--SE ESPERA 30 SEGUNDOS
+--SE VERIFICA TABLA DE NOTIFICACIONES
+
+
+
+
+--LISTA DE USUARIOS
+[
+  {
+    "id": "2",
+    "name": "Ana María Quesada Segura",
+    "username": "ANQUESADA",
+    "role": "Cliente"
+  },
+  {
+    "id": "4",
+    "name": "Maribel Morales Ramos",
+    "username": "MAMORALES",
+    "role": "Asesor"
+  },
+  {
+    "id": "1",
+    "name": "Administrador",
+    "username": "admin",
+    "role": "Admin"
+  },
+  {
+    "id": "3",
+    "name": "Johan Obando Picado",
+    "username": "JOBANDO",
+    "role": "Cliente"
+  }
+]
+
+--LISTA DE INSTRUMENTOS
+{
+  "page": 1,
+  "pageSize": 10,
+  "items": [
+    {
+      "id": "AAPL",
+      "symbol": "AAPL",
+      "name": "Apple Inc.",
+      "type": 0,
+      "sector": "Tecnología",
+      "currency": "USD",
+      "price": 229.77
+    },
+    {
+      "id": "AGG",
+      "symbol": "AGG",
+      "name": "iShares Core US Aggregate",
+      "type": 1,
+      "sector": "Renta fija",
+      "currency": "USD",
+      "price": 103.19
+    },
+    {
+      "id": "AMZN",
+      "symbol": "AMZN",
+      "name": "Amazon.com",
+      "type": 0,
+      "sector": "Consumo",
+      "currency": "USD",
+      "price": 225.03
+    },
+    {
+      "id": "BND",
+      "symbol": "BND",
+      "name": "Vanguard Total Bond",
+      "type": 1,
+      "sector": "Renta fija",
+      "currency": "USD",
+      "price": 75.67
+    },
+    {
+      "id": "CORP5Y",
+      "symbol": "CORP5Y",
+      "name": "Bono corporativo 5 años",
+      "type": 2,
+      "sector": "Corporativo",
+      "currency": "USD",
+      "price": 102.23
+    },
+    {
+      "id": "EFA",
+      "symbol": "EFA",
+      "name": "iShares MSCI EAFE",
+      "type": 1,
+      "sector": "Internacional",
+      "currency": "USD",
+      "price": 87.61
+    },
+    {
+      "id": "GLD",
+      "symbol": "GLD",
+      "name": "SPDR Gold Shares",
+      "type": 1,
+      "sector": "Materias primas",
+      "currency": "USD",
+      "price": 241.79
+    },
+    {
+      "id": "GOOGL",
+      "symbol": "GOOGL",
+      "name": "Alphabet Inc.",
+      "type": 0,
+      "sector": "Tecnología",
+      "currency": "USD",
+      "price": 167.11
+    },
+    {
+      "id": "JPM",
+      "symbol": "JPM",
+      "name": "JPMorgan Chase",
+      "type": 0,
+      "sector": "Finanzas",
+      "currency": "USD",
+      "price": 239.2
+    },
+    {
+      "id": "KO",
+      "symbol": "KO",
+      "name": "Coca-Cola Co.",
+      "type": 0,
+      "sector": "Consumo",
+      "currency": "USD",
+      "price": 70.04
+    }
+  ]
+}

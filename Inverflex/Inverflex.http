@@ -1,0 +1,15 @@
+@Inverflex_HostAddress = http://localhost:8081
+
+POST {{Inverflex_HostAddress}}/api/v1/auth/token
+Content-Type: application/json
+
+{
+  "username": "cliente1",
+  "password": "Demo123!"
+}
+
+###
+
+GET {{Inverflex_HostAddress}}/api/v1/instruments?page=1&pageSize=10
+Accept: application/json
+

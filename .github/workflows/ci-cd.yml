@@ -1,0 +1,57 @@
+name: CI-CD
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Restore
+        run: dotnet restore Inverflex.slnx
+      - name: Static analysis and build
+        run: dotnet build Inverflex.slnx --configuration Release --no-restore /warnaserror
+      - name: Tests and 75% application-policy coverage gate
+        run: >-
+          dotnet test Inverflex.Tests/Inverflex.Tests.csproj --configuration Release --no-build
+          /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:Threshold=75
+          /p:ThresholdType=line
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: Inverflex.Tests/coverage.cobertura.xml
+  deploy-staging:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-test
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Publish API
+        run: dotnet publish Inverflex/Inverflex.csproj -c Release -o publish/api
+      - name: Publish gateway
+        run: dotnet publish Gateway/Gateway.csproj -c Release -o publish/gateway
+      - name: Deploy API to staging slot
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ secrets.AZURE_WEBAPP_NAME }}
+          slot-name: staging
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: publish/api
+      - name: Deploy gateway to staging slot
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: ${{ secrets.AZURE_GATEWAY_WEBAPP_NAME }}
+          slot-name: staging
+          publish-profile: ${{ secrets.AZURE_GATEWAY_PUBLISH_PROFILE }}
+          package: publish/gateway
